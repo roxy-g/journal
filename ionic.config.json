@@ -1,0 +1,8 @@
+{
+  "name": "Diary",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "1e7fe17f"
+}
