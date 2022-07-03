@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'message/:id',
-    loadChildren: () => import('./view-message/view-message.module').then( m => m.ViewMessagePageModule)
+    loadChildren: () => import('./view-journal-entry/view-journal-entry.module').then(m => m.ViewJournalEntryPageModule)
   },
   {
     path: '',
