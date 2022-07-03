@@ -2,19 +2,19 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
-import { MessageComponent } from './message.component';
+import { JournalEntryComponent } from './journal-entry.component';
 
 describe('MessageComponent', () => {
-  let component: MessageComponent;
-  let fixture: ComponentFixture<MessageComponent>;
+  let component: JournalEntryComponent;
+  let fixture: ComponentFixture<JournalEntryComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageComponent ],
+      declarations: [ JournalEntryComponent ],
       imports: [IonicModule.forRoot(), RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MessageComponent);
+    fixture = TestBed.createComponent(JournalEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

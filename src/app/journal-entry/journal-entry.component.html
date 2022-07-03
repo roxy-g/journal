@@ -1,0 +1,18 @@
+<ion-card  *ngIf="entry" [routerLink]="'/message/' + entry.id">
+  <ion-item>
+    <ion-icon name="pin" slot="start"></ion-icon>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        {{entry.date | date:'fullDate'}}
+        <span class="date">
+          <ion-note>{{entry.date | date: 'shortTime'}}</ion-note>
+          <ion-icon name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
+        </span>
+      </h2>
+      <h3>{{ entry.user }}</h3>
+      <p>
+        {{entry.message}}
+      </p>
+    </ion-label>
+  </ion-item>
+</ion-card>
