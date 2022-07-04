@@ -23,3 +23,8 @@
     <app-entry *ngFor="let entry of getEntries()" [entry]="entry"></app-entry>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-button expand="block"  color="secondary" id="add-entry">Add new entry</ion-button>
+  <app-journal-entry-add></app-journal-entry-add>
+</ion-footer>
