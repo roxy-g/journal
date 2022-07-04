@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {IonModal} from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-import {Mood, MOOD_LABEL_MAPPING} from '../services/data.service';
+import {DataService, Mood, MOOD_LABEL_MAPPING, NewJournalEntry} from '../services/data.service';
 
 @Component({
   selector: 'app-journal-entry-add',
@@ -13,10 +13,12 @@ export class JournalEntryAddComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   user: string;
   mood: Mood;
+  message: string;
+
   public moodLabelMapping = MOOD_LABEL_MAPPING;
   public moods = Object.values(Mood);
 
-  constructor() { }
+  constructor(private data: DataService) {}
 
   ngOnInit() {}
 
@@ -25,17 +27,25 @@ export class JournalEntryAddComponent implements OnInit {
   }
 
   confirm() {
-    this.modal.dismiss(this.user, 'confirm');
+    const entry: NewJournalEntry = {
+      date: new Date(),
+      user: this.user,
+      mood: this.mood,
+      message: this.message
+    };
+    this.modal.dismiss(entry, 'confirm');
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    const ev = event as CustomEvent<OverlayEventDetail<NewJournalEntry>>;
     if (ev.detail.role === 'confirm') {
-      console.log('dismiss');
+      this.data.addEntry(ev.detail.data);
     }
   }
 
   changedEditor(event) {
-    console.log('editor-change', event.html);
+    if (event.html) {
+      this.message = event.html;
+    }
   }
 }

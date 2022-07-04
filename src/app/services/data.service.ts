@@ -8,6 +8,8 @@ export interface JournalEntry {
   message: string;
 }
 
+export type NewJournalEntry = Omit<JournalEntry, 'id'>;
+
 export enum Mood {
   happy = 'happy',
   good = 'good',
@@ -76,5 +78,9 @@ export class DataService {
   }
   public getJournalEntryById(id: number): JournalEntry {
     return this.entries.find(entry => entry.id === id);
+  }
+
+  public addEntry(newEntry: NewJournalEntry) {
+    this.entries.push({id: this.entries.length + 1, ...newEntry});
   }
 }
