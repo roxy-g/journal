@@ -13,7 +13,7 @@
       <h2>
         {{ entry.user }}
         <span class="date">
-          <ion-note>{{entry.date | date: 'shortTime'}}</ion-note>
+          <ion-note>{{entry.date | date: 'MMM d, y, h:mm a'}}</ion-note>
         </span>
       </h2>
     </ion-label>
@@ -22,7 +22,7 @@
   <div class="ion-padding">
     <h1>Mood: {{ entry.mood }}</h1>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      {{entry.message}}
     </p>
   </div>
 </ion-content>
