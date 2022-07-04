@@ -14,6 +14,9 @@ import { ViewMessagePageRoutingModule } from './view-journal-entry-routing.modul
     IonicModule,
     ViewMessagePageRoutingModule
   ],
+  exports: [
+    ViewJournalEntryPage
+  ],
   declarations: [ViewJournalEntryPage]
 })
 export class ViewJournalEntryPageModule {}

@@ -20,11 +20,12 @@
   </ion-header>
 
   <ion-list>
-    <app-entry *ngFor="let entry of getEntries()" [entry]="entry"></app-entry>
+    <app-entry *ngFor="let entry of getEntries$() | async" [entry]="entry"></app-entry>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-button expand="block"  color="secondary" id="add-entry">Add new entry</ion-button>
   <app-journal-entry-add></app-journal-entry-add>
+  <app-view-journal-entry></app-view-journal-entry>
 </ion-footer>

@@ -7,10 +7,6 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'entry/:id',
-    loadChildren: () => import('./view-journal-entry/view-journal-entry.module').then(m => m.ViewJournalEntryPageModule)
-  },
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

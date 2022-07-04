@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { JournalEntryComponentModule } from '../journal-entry/journal-entry.module';
 import {JournalEntryAddComponentModule} from '../journal-entry-add/journal-entry-add.module';
+import {ViewJournalEntryPageModule} from '../view-journal-entry/view-journal-entry.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {JournalEntryAddComponentModule} from '../journal-entry-add/journal-entry
     JournalEntryComponentModule,
     JournalEntryAddComponentModule,
     HomePageRoutingModule,
+    ViewJournalEntryPageModule,
   ],
   declarations: [HomePage]
 })

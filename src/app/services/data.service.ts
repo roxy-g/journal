@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
+import {Timestamp} from '@angular/fire/firestore';
+import {map, Observable} from 'rxjs';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat/firestore';
 
 export interface JournalEntry {
-  id: number;
+  id: string;
   date: Date;
   user: string;
   mood: Mood;
+  message: string;
+}
+
+export interface JournalEntity {
+  id?: string;
+  date: Timestamp;
+  user: string;
+  mood: string;
   message: string;
 }
 
@@ -26,61 +37,35 @@ export const MOOD_LABEL_MAPPING: Record<Mood, string> = {
   [Mood.awful]: 'Awful'
 };
 
-const testMessage = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ' +
-  'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ' +
-  'ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat ' +
-  'nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id ' +
-  'est laborum.';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public entries: JournalEntry[] = [
-    {
-      id: 1,
-      date: new Date('2022-07-02T11:19:44.434Z'),
-      user: 'Ksenia',
-      mood: Mood.happy,
-      message: testMessage
-    },
-    {
-      id: 2,
-      date: new Date('2022-07-01T20:50:44.434Z'),
-      user: 'Bob',
-      mood: Mood.awful,
-      message: testMessage
-    },    {
-      id: 3,
-      date: new Date('2022-07-01T09:15:00.000Z'),
-      user: 'Ksenia',
-      mood: Mood.good,
-      message: testMessage
-    },    {
-      id: 4,
-      date:  new Date('2022-07-01T09:15:00.000Z'),
-      user: 'Ksenia',
-      mood: Mood.meh,
-      message: testMessage
-    },    {
-      id: 5,
-      date: new Date('2022-06-30T23:58:00.000Z'),
-      user: 'Bob',
-      mood: Mood.bad,
-      message: testMessage
-    }
-  ];
+  protected entries$: Observable<JournalEntry[]>;
+  private entryCollection: AngularFirestoreCollection<JournalEntity>;
 
-  constructor() { }
-
-  public getJournalEntries(): JournalEntry[] {
-    return this.entries;
+  constructor(private afs: AngularFirestore) {
+    this.entryCollection = afs.collection<JournalEntity>('journalEntry');
+    this.entries$ = this.entryCollection.valueChanges().pipe(map(docs => docs.map(d => ({
+      id: d.id,
+      user: d.user,
+      message: d.message,
+      mood: Mood[d.mood],
+      date: (d.date as Timestamp).toDate()})
+    )));
   }
-  public getJournalEntryById(id: number): JournalEntry {
-    return this.entries.find(entry => entry.id === id);
+
+  public getJournalEntries$(): Observable<JournalEntry[]> {
+    return this.entries$;
   }
 
   public addEntry(newEntry: NewJournalEntry) {
-    this.entries.push({id: this.entries.length + 1, ...newEntry});
+    this.entryCollection.add({
+      user: newEntry.user,
+      message: newEntry.message,
+      mood: newEntry.mood,
+      date: Timestamp.fromDate(newEntry.date)
+    });
   }
 }

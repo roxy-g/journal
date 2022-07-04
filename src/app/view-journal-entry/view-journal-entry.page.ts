@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {DataService, JournalEntry} from '../services/data.service';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {JournalEntry} from '../services/data.service';
+import {IonModal} from '@ionic/angular';
 
 @Component({
   selector: 'app-view-journal-entry',
@@ -8,21 +8,21 @@ import {DataService, JournalEntry} from '../services/data.service';
   styleUrls: ['./view-journal-entry.page.scss'],
 })
 export class ViewJournalEntryPage implements OnInit {
-  public entry: JournalEntry;
+  @ViewChild(IonModal) modal: IonModal;
+  @Input() entry: JournalEntry;
 
-  constructor(
-    private data: DataService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.entry = this.data.getJournalEntryById(parseInt(id, 10));
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 
   getBackButtonText() {
     const win = window as any;
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
+  }
+
+  ngOnInit(): void {
   }
 }
