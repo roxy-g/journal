@@ -67,6 +67,6 @@ export class DataService {
     return this.entries;
   }
   public getJournalEntryById(id: number): JournalEntry {
-    return this.entries[id];
+    return this.entries.find(entry => entry.id === id);
   }
 }

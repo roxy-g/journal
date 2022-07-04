@@ -25,9 +25,4 @@ export class ViewJournalEntryPage implements OnInit {
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
   }
-
-  isIos() {
-    const win = window as any;
-    return win && win.Ionic && win.Ionic.mode === 'ios';
-  }
 }
