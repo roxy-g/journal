@@ -24,4 +24,8 @@
     <h1>Mood: {{ entry.mood }}</h1>
     <p [innerHTML]="entry.message"></p>
   </div>
+
 </ion-content>
+<ion-footer>
+  <ion-button expand="block" color="primary" id="delete-entry" (click)="delete()">Delete</ion-button>
+</ion-footer>

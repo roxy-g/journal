@@ -49,13 +49,16 @@ export class DataService {
     this.entryCollection = afs.collection<JournalEntity>('journalEntry', ref =>
       ref.orderBy('date','desc'));
 
-    this.entries$ = this.entryCollection.valueChanges().pipe(map(docs => docs.map(doc => ({
-      id: doc.id,
-      user: doc.user,
-      message: doc.message,
-      mood: Mood[doc.mood],
-      date: (doc.date as Timestamp).toDate()})
-    )));
+    this.entries$ = this.entryCollection.snapshotChanges().pipe(map(actions => actions.map(a => {
+          const doc = a.payload.doc.data();
+          return  {
+            id: a.payload.doc.id,
+            user: doc.user,
+            message: doc.message,
+            mood: Mood[doc.mood],
+            date: (doc.date as Timestamp).toDate()
+          };
+        })));
   }
 
   public getJournalEntries$(): Observable<JournalEntry[]> {
@@ -63,11 +66,15 @@ export class DataService {
   }
 
   public addEntry(newEntry: NewJournalEntry) {
-    this.entryCollection.add({
+    return this.entryCollection.add({
       user: newEntry.user,
       message: newEntry.message,
       mood: newEntry.mood,
       date: Timestamp.fromDate(newEntry.date)
     });
+  }
+
+  public deleteEntry(id: string) {
+    return this.entryCollection.doc(id).delete();
   }
 }

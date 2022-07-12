@@ -23,7 +23,7 @@ export class JournalEntryAddComponent implements OnInit {
   ngOnInit() {}
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    return this.modal.dismiss(null, 'cancel');
   }
 
   confirm() {
@@ -33,7 +33,7 @@ export class JournalEntryAddComponent implements OnInit {
       mood: this.mood,
       message: this.message
     };
-    this.modal.dismiss(entry, 'confirm');
+    return this.modal.dismiss(entry, 'confirm');
   }
 
   onWillDismiss(event: Event) {

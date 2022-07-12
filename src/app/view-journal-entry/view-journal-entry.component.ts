@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {JournalEntry} from '../services/data.service';
+import {DataService, JournalEntry} from '../services/data.service';
 import {ModalController} from '@ionic/angular';
 
 @Component({
@@ -10,7 +10,12 @@ import {ModalController} from '@ionic/angular';
 export class ViewJournalEntryComponent implements OnInit {
   @Input() entry: JournalEntry;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController, private data: DataService) {}
+
+  async delete() {
+    await this.data.deleteEntry(this.entry.id);
+    await this.modalCtrl.dismiss(null, 'deleted');
+  }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
