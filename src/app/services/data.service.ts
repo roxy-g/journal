@@ -47,12 +47,12 @@ export class DataService {
 
   constructor(private afs: AngularFirestore) {
     this.entryCollection = afs.collection<JournalEntity>('journalEntry');
-    this.entries$ = this.entryCollection.valueChanges().pipe(map(docs => docs.map(d => ({
-      id: d.id,
-      user: d.user,
-      message: d.message,
-      mood: Mood[d.mood],
-      date: (d.date as Timestamp).toDate()})
+    this.entries$ = this.entryCollection.valueChanges().pipe(map(docs => docs.map(doc => ({
+      id: doc.id,
+      user: doc.user,
+      message: doc.message,
+      mood: Mood[doc.mood],
+      date: (doc.date as Timestamp).toDate()})
     )));
   }
 

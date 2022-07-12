@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {JournalEntry} from '../services/data.service';
-import {IonModal} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-view-journal-entry',
@@ -8,19 +8,12 @@ import {IonModal} from '@ionic/angular';
   styleUrls: ['./view-journal-entry.page.scss'],
 })
 export class ViewJournalEntryPage implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
   @Input() entry: JournalEntry;
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) {}
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
-
-  getBackButtonText() {
-    const win = window as any;
-    const mode = win && win.Ionic && win.Ionic.mode;
-    return mode === 'ios' ? 'Inbox' : '';
+    return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   ngOnInit(): void {
