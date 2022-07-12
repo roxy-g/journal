@@ -3,19 +3,19 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ViewJournalEntryPageModule } from './view-journal-entry.module';
 
-import { ViewJournalEntryPage } from './view-journal-entry.page';
+import { ViewJournalEntryComponent } from './view-journal-entry.page';
 
 describe('ViewJournalEntryPage', () => {
-  let component: ViewJournalEntryPage;
-  let fixture: ComponentFixture<ViewJournalEntryPage>;
+  let component: ViewJournalEntryComponent;
+  let fixture: ComponentFixture<ViewJournalEntryComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewJournalEntryPage ],
+      declarations: [ ViewJournalEntryComponent ],
       imports: [IonicModule.forRoot(), ViewJournalEntryPageModule, RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ViewJournalEntryPage);
+    fixture = TestBed.createComponent(ViewJournalEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

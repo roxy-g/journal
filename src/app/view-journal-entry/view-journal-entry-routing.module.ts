@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ViewJournalEntryPage } from './view-journal-entry.page';
+import { ViewJournalEntryComponent } from './view-journal-entry.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ViewJournalEntryPage
+    component: ViewJournalEntryComponent
   }
 ];
 

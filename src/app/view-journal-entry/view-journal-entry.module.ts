@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewJournalEntryPage } from './view-journal-entry.page';
+import { ViewJournalEntryComponent } from './view-journal-entry.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,8 +15,8 @@ import { ViewMessagePageRoutingModule } from './view-journal-entry-routing.modul
     ViewMessagePageRoutingModule
   ],
   exports: [
-    ViewJournalEntryPage
+    ViewJournalEntryComponent
   ],
-  declarations: [ViewJournalEntryPage]
+  declarations: [ViewJournalEntryComponent]
 })
 export class ViewJournalEntryPageModule {}

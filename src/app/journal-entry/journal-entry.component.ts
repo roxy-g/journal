@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {JournalEntry} from '../services/data.service';
 import {ModalController} from '@ionic/angular';
-import {ViewJournalEntryPage} from '../view-journal-entry/view-journal-entry.page';
+import {ViewJournalEntryComponent} from '../view-journal-entry/view-journal-entry.component';
 
 @Component({
   selector: 'app-entry',
@@ -22,7 +22,7 @@ export class JournalEntryComponent implements OnInit {
 
   async viewEntry() {
     const modal = await this.modalCtrl.create({
-      component: ViewJournalEntryPage,
+      component: ViewJournalEntryComponent,
       componentProps: {entry: this.entry}
     });
     await modal.present();

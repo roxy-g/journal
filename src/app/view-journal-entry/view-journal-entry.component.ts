@@ -4,10 +4,10 @@ import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-view-journal-entry',
-  templateUrl: './view-journal-entry.page.html',
-  styleUrls: ['./view-journal-entry.page.scss'],
+  templateUrl: './view-journal-entry.component.html',
+  styleUrls: ['./view-journal-entry.component.scss'],
 })
-export class ViewJournalEntryPage implements OnInit {
+export class ViewJournalEntryComponent implements OnInit {
   @Input() entry: JournalEntry;
 
   constructor(private modalCtrl: ModalController) {}

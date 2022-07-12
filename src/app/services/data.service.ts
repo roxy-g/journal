@@ -48,6 +48,7 @@ export class DataService {
   constructor(private afs: AngularFirestore) {
     this.entryCollection = afs.collection<JournalEntity>('journalEntry', ref =>
       ref.orderBy('date','desc'));
+
     this.entries$ = this.entryCollection.valueChanges().pipe(map(docs => docs.map(doc => ({
       id: doc.id,
       user: doc.user,
